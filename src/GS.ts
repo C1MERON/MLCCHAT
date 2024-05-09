@@ -16,17 +16,27 @@ function setLabel(id: string, text: string) {
   label.innerText = text;
 }
 
-function setLoadingBar(progress: number) {
-  const bar = document.getElementById("loading-bar");
-  if (bar != null) {
-    bar.style.width = `${progress}%`;
+function setCircularProgress(progress: number) {
+  const circle = document.getElementById("loading-path") as SVGPathElement;
+  const text = document.getElementById("loading-text");
+  const radius = 15.9155;
+  const circumference = 2 * Math.PI * radius;
+
+  if (circle != null) {
+    const offset = circumference - (progress / 100) * circumference;
+    circle.style.strokeDasharray = `${circumference}, ${circumference}`;
+    circle.style.strokeDashoffset = `${offset}`;
+  }
+
+  if (text != null) {
+    text.innerText = `${progress}%`;
   }
 }
 
-function completeLoadingBar() {
-  const bar = document.getElementById("loading-bar");
-  if (bar != null) {
-    bar.style.backgroundColor = "#2196f3";
+function completeCircularProgress() {
+  const circle = document.getElementById("loading-path") as SVGPathElement;
+  if (circle != null) {
+    circle.style.stroke = "#2196f3";
   }
 }
 
@@ -66,7 +76,7 @@ async function main() {
       const currentStage = parseInt(match[1], 10);
       const totalStages = parseInt(match[2], 10);
       const progress = Math.round((currentStage / totalStages) * 100);
-      setLoadingBar(progress);
+      setCircularProgress(progress);
     }
   };
 
@@ -76,7 +86,7 @@ async function main() {
     { initProgressCallback: initProgressCallback }
   );
 
-  completeLoadingBar(); // Turn the bar to blue when loading is complete
+  completeCircularProgress(); // Turn the circle to blue when loading is complete
 
   async function generateResponse() {
     const userInput = (document.getElementById("user-input") as HTMLInputElement).value;

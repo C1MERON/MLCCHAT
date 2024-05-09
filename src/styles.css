@@ -15,20 +15,39 @@ h3 {
   margin-bottom: 10px;
 }
 
-#loading-bar-container {
+#loading-circle-container {
   width: 100%;
   max-width: 600px;
   margin: 0 auto 20px;
-  background-color: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#loading-bar {
-  height: 20px;
-  width: 0%;
-  background-color: #4caf50;
-  transition: width 0.2s, background-color 0.4s;
+#loading-circle {
+  width: 100px;
+  height: 100px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  stroke: #4caf50;
+  stroke-dasharray: 100, 100;
+  transition: stroke-dasharray 0.3s, stroke 0.4s;
+}
+
+.loading-text {
+  margin-top: -60px;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 #conversation-wrapper {
@@ -78,7 +97,8 @@ h3 {
   flex-direction: row;
   justify-content: center;
   gap: 10px;
-  margin-top: auto;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 input[type="text"] {

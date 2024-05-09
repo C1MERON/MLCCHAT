@@ -2,13 +2,17 @@
 <html>
   <head>
     <title>MLC Chat Integration</title>
-    <script type="module" crossorigin src="/assets/index-CuHa0iwG.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BfRB7xTH.css">
+    <script type="module" crossorigin src="/assets/index-BQD_FWRf.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CtqkNVDe.css">
   </head>
   <body>
     <h2>WebLLM Test Page</h2>
-    <div id="loading-bar-container" class="loading-bar-container">
-      <div id="loading-bar" class="loading-bar"></div>
+    <div id="loading-circle-container" class="loading-circle-container">
+      <svg id="loading-circle" class="loading-circle" viewBox="0 0 36 36">
+        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+        <path id="loading-path" class="circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+      </svg>
+      <div id="loading-text" class="loading-text">0%</div>
     </div>
     <label id="init-label"></label>
 
@@ -16,7 +20,6 @@
     <div id="conversation-wrapper" class="conversation-wrapper"></div>
 
     <div id="prompt-container">
-      <h3>Prompt</h3>
       <input type="text" id="user-input" placeholder="Ask a question" />
       <button id="send-btn">Send</button>
       <button id="restart-btn">Restart</button>
