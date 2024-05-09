@@ -16,6 +16,29 @@ function setLabel(id: string, text: string) {
   label.innerText = text;
 }
 
+function scrollConversationToBottom() {
+  const conversationWrapper = document.getElementById("conversation-wrapper");
+  if (conversationWrapper != null) {
+    conversationWrapper.scrollTop = conversationWrapper.scrollHeight;
+  }
+}
+
+function updateConversationUI(conversation: ChatCompletionMessageParam[], isTyping: boolean = false) {
+  const conversationWrapper = document.getElementById("conversation-wrapper");
+  if (conversationWrapper != null) {
+    conversationWrapper.innerHTML = conversation
+      .map((message) => {
+        const messageClass = message.role === "user" ? "message-user" : "message-assistant";
+        return `<div class="message ${messageClass}">${message.content}</div>`;
+      })
+      .join("");
+    if (isTyping) {
+      conversationWrapper.innerHTML += `<div class="typing-indicator">LLM is typing...</div>`;
+    }
+    scrollConversationToBottom();
+  }
+}
+
 // Initialize an empty conversation array with the correct type
 let conversation: ChatCompletionMessageParam[] = [];
 
@@ -35,6 +58,8 @@ async function main() {
 
     if (userInput) {
       conversation.push({ role: "user", content: userInput });
+      updateConversationUI(conversation, true); // Show typing indicator
+      (document.getElementById("user-input") as HTMLInputElement).value = "";
 
       const response = await engine.chat.completions.create({
         messages: conversation,
@@ -46,10 +71,8 @@ async function main() {
       const choice = response.choices[0];
       conversation.push({ role: "assistant", content: choice.message?.content || "No response received." });
 
-      setLabel("prompt-label", `Prompt: ${userInput}`);
-      setLabel("generate-label", `Response: ${choice.message?.content || "No response received."}`);
+      updateConversationUI(conversation);
       setLabel("stats-label", await engine.runtimeStatsText());
-      (document.getElementById("user-input") as HTMLInputElement).value = "";
     } else {
       alert("Please enter a prompt!");
     }
@@ -57,8 +80,7 @@ async function main() {
 
   function restartConversation() {
     conversation = [];
-    setLabel("prompt-label", "");
-    setLabel("generate-label", "");
+    updateConversationUI(conversation);
     setLabel("stats-label", "");
     (document.getElementById("user-input") as HTMLInputElement).value = "";
   }

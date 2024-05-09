@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MLC Chat Integration</title>
-    <script type="module" crossorigin src="/assets/index-BO1WSQ--.js"></script>
+    <title>MLC Chat Integration</title>
+    <script type="module" crossorigin src="/assets/index-D_NYMuzk.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bf7akm7o.css">
   </head>
   <body>
     <h2>WebLLM Test Page</h2>
     <label id="init-label"></label>
 
-    <h3>Prompt</h3>
-    <input type="text" id="user-input" placeholder="Ask a question" />
-    <button id="send-btn">Send</button>
-    <button id="restart-btn">Restart</button>
-
     <h3>Conversation</h3>
-    <label id="prompt-label"></label>
-    <label id="generate-label"></label>
-    <br />
+    <div id="conversation-wrapper" class="conversation-wrapper"></div>
+
+    <div id="prompt-container">
+      <h3>Prompt</h3>
+      <input type="text" id="user-input" placeholder="Ask a question" />
+      <button id="send-btn">Send</button>
+      <button id="restart-btn">Restart</button>
+    </div>
+
     <label id="stats-label"></label>
 
     <!-- Import the original TypeScript file; Vite will handle the rest -->
