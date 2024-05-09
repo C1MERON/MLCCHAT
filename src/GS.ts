@@ -16,6 +16,20 @@ function setLabel(id: string, text: string) {
   label.innerText = text;
 }
 
+function setLoadingBar(progress: number) {
+  const bar = document.getElementById("loading-bar");
+  if (bar != null) {
+    bar.style.width = `${progress}%`;
+  }
+}
+
+function completeLoadingBar() {
+  const bar = document.getElementById("loading-bar");
+  if (bar != null) {
+    bar.style.backgroundColor = "#2196f3";
+  }
+}
+
 function scrollConversationToBottom() {
   const conversationWrapper = document.getElementById("conversation-wrapper");
   if (conversationWrapper != null) {
@@ -45,6 +59,15 @@ let conversation: ChatCompletionMessageParam[] = [];
 async function main() {
   const initProgressCallback = (report: webllm.InitProgressReport) => {
     setLabel("init-label", report.text);
+
+    // Extract the loading progress as current and total stages
+    const match = report.text.match(/\[(\d+)\/(\d+)\]/);
+    if (match) {
+      const currentStage = parseInt(match[1], 10);
+      const totalStages = parseInt(match[2], 10);
+      const progress = Math.round((currentStage / totalStages) * 100);
+      setLoadingBar(progress);
+    }
   };
 
   const selectedModel = "Llama-3-8B-Instruct-q4f32_1";
@@ -52,6 +75,8 @@ async function main() {
     selectedModel,
     { initProgressCallback: initProgressCallback }
   );
+
+  completeLoadingBar(); // Turn the bar to blue when loading is complete
 
   async function generateResponse() {
     const userInput = (document.getElementById("user-input") as HTMLInputElement).value;
