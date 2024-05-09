@@ -105,11 +105,42 @@ input[type="text"] {
   width: 60%;
   padding: 10px;
   margin-right: 10px;
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-button {
+#send-btn {
   padding: 10px;
   margin-right: 10px;
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc;
+  background-color: #2196f3; /* Blue */
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+#send-btn:hover {
+  background-color: #1976d2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#restart-btn {
+  padding: 10px;
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc;
+  background-color: #ffeb3b; /* Light yellow */
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.2s;
+}
+
+#restart-btn:hover {
+  background-color: #fdd835;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 footer {
