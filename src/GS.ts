@@ -10,7 +10,8 @@ interface ChatCompletionMessageParam {
 function setLabel(id: string, text: string) {
   const label = document.getElementById(id);
   if (label == null) {
-    throw Error("Cannot find label " + id);
+    console.error(`Cannot find label ${id}`);
+    return;
   }
   label.innerText = text;
 }
