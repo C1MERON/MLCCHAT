@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.35",
+    "vite": "^5.2.11"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.267"
+  }
+}
