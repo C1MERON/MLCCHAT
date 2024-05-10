@@ -110,15 +110,18 @@ input[type="text"] {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#send-btn {
+button {
   padding: 10px;
   margin-right: 10px;
   border-radius: 10px; /* Rounded corners */
   border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#send-btn {
   background-color: #2196f3; /* Blue */
   color: white;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, box-shadow 0.2s;
 }
 
@@ -128,19 +131,25 @@ input[type="text"] {
 }
 
 #restart-btn {
-  padding: 10px;
-  border-radius: 10px; /* Rounded corners */
-  border: 1px solid #ccc;
   background-color: #ffeb3b; /* Light yellow */
   color: black;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, box-shadow 0.2s;
 }
 
 #restart-btn:hover {
   background-color: #fdd835;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+select#chatui-select {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 10px;
+  padding: 10px;
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 footer {

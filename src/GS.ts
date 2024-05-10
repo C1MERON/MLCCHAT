@@ -63,10 +63,12 @@ function updateConversationUI(conversation: ChatCompletionMessageParam[], isTypi
   }
 }
 
-// Initialize an empty conversation array with the correct type
+// Initialize conversation and other variables
 let conversation: ChatCompletionMessageParam[] = [];
+let engine: webllm.EngineInterface | null = null;
+let selectedModel = "Llama-3-8B-Instruct-q4f32_1";
 
-async function main() {
+async function loadModel(modelName: string) {
   const initProgressCallback = (report: webllm.InitProgressReport) => {
     setLabel("init-label", report.text);
 
@@ -80,47 +82,50 @@ async function main() {
     }
   };
 
-  const selectedModel = "Llama-3-8B-Instruct-q4f32_1";
-  const engine: webllm.EngineInterface = await webllm.CreateEngine(
-    selectedModel,
-    { initProgressCallback: initProgressCallback }
-  );
-
+  engine = await webllm.CreateEngine(modelName, { initProgressCallback: initProgressCallback });
   completeCircularProgress(); // Turn the circle to blue when loading is complete
+  setLabel("stats-label", await engine.runtimeStatsText());
+}
 
-  async function generateResponse() {
-    const userInput = (document.getElementById("user-input") as HTMLInputElement).value;
+async function generateResponse() {
+  const userInput = (document.getElementById("user-input") as HTMLInputElement).value;
 
-    if (userInput) {
-      conversation.push({ role: "user", content: userInput });
-      updateConversationUI(conversation, true); // Show typing indicator
-      (document.getElementById("user-input") as HTMLInputElement).value = "";
-
-      const response = await engine.chat.completions.create({
-        messages: conversation,
-        n: 1,
-        temperature: 1.5,
-        max_gen_len: 256,
-      });
-
-      const choice = response.choices[0];
-      conversation.push({ role: "assistant", content: choice.message?.content || "No response received." });
-
-      updateConversationUI(conversation);
-      setLabel("stats-label", await engine.runtimeStatsText());
-    } else {
-      alert("Please enter a prompt!");
+  if (userInput) {
+    if (!engine) {
+      console.log(`Loading default model: ${selectedModel}`);
+      await loadModel(selectedModel);
     }
-  }
 
-  function restartConversation() {
-    conversation = [];
-    updateConversationUI(conversation);
-    setLabel("stats-label", "");
+    conversation.push({ role: "user", content: userInput });
+    updateConversationUI(conversation, true); // Show typing indicator
     (document.getElementById("user-input") as HTMLInputElement).value = "";
-  }
 
-  // Attach event listeners
+    const response = await engine!.chat.completions.create({
+      messages: conversation,
+      n: 1,
+      temperature: 1.5,
+      max_gen_len: 256,
+    });
+
+    const choice = response.choices[0];
+    conversation.push({ role: "assistant", content: choice.message?.content || "No response received." });
+
+    updateConversationUI(conversation);
+    setLabel("stats-label", await engine.runtimeStatsText());
+  } else {
+    alert("Please enter a prompt!");
+  }
+}
+
+function restartConversation() {
+  conversation = [];
+  updateConversationUI(conversation);
+  setLabel("stats-label", "");
+  (document.getElementById("user-input") as HTMLInputElement).value = "";
+}
+
+// Attach event listeners
+function main() {
   const sendBtn = document.getElementById("send-btn");
   if (sendBtn != null) {
     console.log("Send button found, attaching event listener.");
@@ -141,6 +146,19 @@ async function main() {
     });
   } else {
     console.error("Restart button not found.");
+  }
+
+  const modelSelect = document.getElementById("chatui-select") as HTMLSelectElement;
+  if (modelSelect != null) {
+    console.log("Model select found, attaching event listener.");
+    modelSelect.addEventListener("change", async () => {
+      selectedModel = modelSelect.value;
+      console.log(`Selected model: ${selectedModel}`);
+      restartConversation();
+      engine = null; // Reset engine to trigger loading on next Send button click
+    });
+  } else {
+    console.error("Model select not found.");
   }
 }
 

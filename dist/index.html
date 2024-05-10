@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>MLC Chat Integration</title>
-    <script type="module" crossorigin src="/assets/index-C4IZg8El.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BcjCggum.css">
+    <script type="module" crossorigin src="/assets/index-CYh3R3g7.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BULQrcsL.css">
   </head>
   <body>
     <h2>WebLLM Test Page</h2>
@@ -15,6 +15,46 @@
       <div id="loading-text" class="loading-text">0%</div>
     </div>
     <label id="init-label"></label>
+
+    <h3>Model Selection</h3>
+    <select id="chatui-select">
+      <option value="Llama-3-8B-Instruct-q4f32_1-1k">Llama-3-8B-Instruct-q4f32_1-1k</option>
+      <option value="Llama-3-8B-Instruct-q4f16_1-1k">Llama-3-8B-Instruct-q4f16_1-1k</option>
+      <option value="Llama-3-8B-Instruct-q4f32_1">Llama-3-8B-Instruct-q4f32_1</option>
+      <option value="Llama-3-8B-Instruct-q4f16_1">Llama-3-8B-Instruct-q4f16_1</option>
+      <option value="Llama-3-70B-Instruct-q3f16_1">Llama-3-70B-Instruct-q3f16_1</option>
+      <option value="Llama-2-7b-chat-hf-q4f32_1-1k">Llama-2-7b-chat-hf-q4f32_1-1k</option>
+      <option value="Llama-2-7b-chat-hf-q4f16_1-1k">Llama-2-7b-chat-hf-q4f16_1-1k</option>
+      <option value="Llama-2-7b-chat-hf-q4f32_1">Llama-2-7b-chat-hf-q4f32_1</option>
+      <option value="Llama-2-7b-chat-hf-q4f16_1">Llama-2-7b-chat-hf-q4f16_1</option>
+      <option value="Llama-2-13b-chat-hf-q4f16_1">Llama-2-13b-chat-hf-q4f16_1</option>
+      <option value="WizardMath-7B-V1.1-q4f16_1">WizardMath-7B-V1.1-q4f16_1</option>
+      <option value="Mistral-7B-Instruct-v0.2-q4f16_1">Mistral-7B-Instruct-v0.2-q4f16_1</option>
+      <option value="OpenHermes-2.5-Mistral-7B-q4f16_1">OpenHermes-2.5-Mistral-7B-q4f16_1</option>
+      <option value="NeuralHermes-2.5-Mistral-7B-q4f16_1">NeuralHermes-2.5-Mistral-7B-q4f16_1</option>
+      <option value="gemma-2b-it-q4f16_1">gemma-2b-it-q4f16_1</option>
+      <option value="gemma-2b-it-q4f32_1">gemma-2b-it-q4f32_1</option>
+      <option value="gemma-2b-it-q4f16_1-1k">gemma-2b-it-q4f16_1-1k</option>
+      <option value="gemma-2b-it-q4f32_1-1k">gemma-2b-it-q4f32_1-1k</option>
+      <option value="RedPajama-INCITE-Chat-3B-v1-q4f16_1">RedPajama-INCITE-Chat-3B-v1-q4f16_1</option>
+      <option value="RedPajama-INCITE-Chat-3B-v1-q4f32_1">RedPajama-INCITE-Chat-3B-v1-q4f32_1</option>
+      <option value="RedPajama-INCITE-Chat-3B-v1-q4f16_1-1k">RedPajama-INCITE-Chat-3B-v1-q4f16_1-1k</option>
+      <option value="RedPajama-INCITE-Chat-3B-v1-q4f32_1-1k">RedPajama-INCITE-Chat-3B-v1-q4f32_1-1k</option>
+      <option value="Phi2-q0f16">Phi2-q0f16</option>
+      <option value="Phi2-q0f32">Phi2-q0f32</option>
+      <option value="Phi2-q4f16_1">Phi2-q4f16_1</option>
+      <option value="Phi2-q4f32_1">Phi2-q4f32_1</option>
+      <option value="Phi2-q4f16_1-1k">Phi2-q4f16_1-1k</option>
+      <option value="Phi2-q4f32_1-1k">Phi2-q4f32_1-1k</option>
+      <option value="Phi1.5-q0f16">Phi1.5-q0f16</option>
+      <option value="Phi1.5-q0f32">Phi1.5-q0f32</option>
+      <option value="Phi1.5-q4f16_1-1k">Phi1.5-q4f16_1-1k</option>
+      <option value="Phi1.5-q4f32_1-1k">Phi1.5-q4f32_1-1k</option>
+      <option value="TinyLlama-1.1B-Chat-v0.4-q0f16">TinyLlama-1.1B-Chat-v0.4-q0f16</option>
+      <option value="TinyLlama-1.1B-Chat-v0.4-q0f32">TinyLlama-1.1B-Chat-v0.4-q0f32</option>
+      <option value="TinyLlama-1.1B-Chat-v0.4-q4f16_1-1k">TinyLlama-1.1B-Chat-v0.4-q4f16_1-1k</option>
+      <option value="TinyLlama-1.1B-Chat-v0.4-q4f32_1-1k">TinyLlama-1.1B-Chat-v0.4-q4f32_1-1k</option>
+    </select>
 
     <h3>Conversation</h3>
     <div id="conversation-wrapper" class="conversation-wrapper"></div>
